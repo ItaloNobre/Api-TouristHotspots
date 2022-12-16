@@ -10,4 +10,4 @@ class Comment(models.Model):
     okay = models.BooleanField(default=True)
 
     def __str__(self):
-        return self.user.first_name
+        return self.user.username

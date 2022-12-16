@@ -1,6 +1,6 @@
 from django.db import models
 
-class Attractions(models.Model):
+class Attraction(models.Model):
     name = models.CharField(max_length=150)
     description = models.TextField()
     opening_hours = models.TextField()

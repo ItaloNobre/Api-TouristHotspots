@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Attractions
+from .models import Attraction
 
 # Register your models here.
 
-admin.site.register(Attractions)
+admin.site.register(Attraction)

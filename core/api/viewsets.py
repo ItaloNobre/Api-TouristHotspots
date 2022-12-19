@@ -3,6 +3,8 @@ from core.models import TouristHotspot
 from .serializers import TouristHotspotSerializer
 
 class TouristHotspotViewSet(viewsets.ModelViewSet):
-   
-    queryset = TouristHotspot.objects.all()
+
     serializer_class = TouristHotspotSerializer
+
+    def get_queryset(self):
+        return TouristHotspot.objects.filter(approved=True)

@@ -9,6 +9,22 @@ class TouristHotspotViewSet(viewsets.ModelViewSet):
     serializer_class = TouristHotspotSerializer
 
     def get_queryset(self):
+          id = self.request.query_params.get('id', None)
+          nome = self.request.query_params.get('nome', None)
+          descricao = self.request.query_params.get('descricao', None)
+          queryset = TouristHotspot.objects.all()
+
+          if id:
+               queryset = TouristHotspot.objects.filter(pk=id)
+
+          if nome:
+               queryset = queryset.filter(nome__iexact=nome)
+
+          if descricao:
+               queryset = queryset.filter(descricao__iexact=descricao)
+
+          return queryset
+    def get_queryset(self):
         return TouristHotspot.objects.filter(approved=True)
 
     def list(self, request, *args, **kwargs):

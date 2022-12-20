@@ -14,6 +14,7 @@ class TouristHotspot(models.Model):
     assessments = models.ManyToManyField(Assessment,null=True,blank=True)
     Addresses = models.ForeignKey(
         Address, on_delete=models.CASCADE,null=True,blank=True)
+    Photo = models.ImageField(upload_to='pontos_turisticos', null=True, blank=True)
 
 
     def __str__(self):

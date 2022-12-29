@@ -45,5 +45,10 @@ class TouristHotspotViewSet(viewsets.ModelViewSet):
     def partial_update(self, request, *args, **kwargs):
          return super().partial_update(request, *args, **kwargs)
     
+    @action(methods=['get'], detail=True)
+    def denunciar(self, request, pk=None):
+          pass
     
-    
+    @action(methods=['post'], detail=False)
+    def teste(self,request):
+          pass

@@ -6,18 +6,17 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from core.models import TouristHotspot
 from .serializers import TouristHotspotSerializer
-from rest_framework.permissions import IsAuthenticated,IsAdminUser,IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated,IsAdminUser,IsAuthenticatedOrReadOnly,DjangoModelPermissions
 from rest_framework.authentication import TokenAuthentication
 
 class TouristHotspotViewSet(viewsets.ModelViewSet):
 
     serializer_class = TouristHotspotSerializer
     filter_backends = [filters.SearchFilter]
-    permission_classes = [IsAuthenticatedOrReadOnly,]
+    permission_classes = [DjangoModelPermissions,]
     authentication_classes = [TokenAuthentication]
     search_fields = ('name','description')
     
-
     def get_queryset(self):
           id = self.request.query_params.get('id', None)
           nome = self.request.query_params.get('name', None)

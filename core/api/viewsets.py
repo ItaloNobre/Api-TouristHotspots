@@ -1,3 +1,6 @@
+
+from warnings import filters
+from rest_framework import filters
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import viewsets
@@ -7,11 +10,14 @@ from .serializers import TouristHotspotSerializer
 class TouristHotspotViewSet(viewsets.ModelViewSet):
 
     serializer_class = TouristHotspotSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ('name','^description')
+    
 
     def get_queryset(self):
           id = self.request.query_params.get('id', None)
-          nome = self.request.query_params.get('nome', None)
-          descricao = self.request.query_params.get('descricao', None)
+          nome = self.request.query_params.get('name', None)
+          descricao = self.request.query_params.get('description', None)
           queryset = TouristHotspot.objects.all()
 
           if id:
@@ -52,3 +58,6 @@ class TouristHotspotViewSet(viewsets.ModelViewSet):
     @action(methods=['post'], detail=False)
     def teste(self,request):
           pass
+
+
+   

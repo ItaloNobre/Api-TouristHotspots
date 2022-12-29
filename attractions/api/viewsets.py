@@ -1,4 +1,3 @@
-from warnings import filters
 from rest_framework import viewsets
 from attractions.models import Attraction
 from .serializers import AttractionSerializer
@@ -10,4 +9,5 @@ class AttractionViewSet(viewsets.ModelViewSet):
     queryset = Attraction.objects.all()
     serializer_class = AttractionSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ('name','=description')
+    search_fields = ('name','^description')
+    """lookup_field = 'name'"""

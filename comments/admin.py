@@ -1,6 +1,10 @@
 from django.contrib import admin
+
+from comments.actions import approved_comments, disapprove_comments
 from .models import Comment
 
-# Register your models here.
+class comment_admin(admin.ModelAdmin):
+    list_display = ['user','date','okay']
+    actions = [disapprove_comments,approved_comments]
 
-admin.site.register(Comment)
+admin.site.register(Comment,comment_admin)

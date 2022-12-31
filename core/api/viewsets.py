@@ -14,7 +14,7 @@ class TouristHotspotViewSet(viewsets.ModelViewSet):
     serializer_class = TouristHotspotSerializer
     queryset = TouristHotspot.objects.all()
     filter_backends = [filters.SearchFilter]
-    permission_classes = [DjangoModelPermissions,]
+    permission_classes = [IsAuthenticated,]
     authentication_classes = [TokenAuthentication]
     search_fields = ('name','description')
     

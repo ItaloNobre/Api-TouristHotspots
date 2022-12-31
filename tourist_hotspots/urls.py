@@ -16,14 +16,24 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework import routers
+from django.conf import settings
+from django.conf.urls.static import static
 from core.api.viewsets import TouristHotspotViewSet
 from attractions.api.viewsets import AttractionViewSet
+from addresses.api.viewsets import AddressViewSet
+from comments.api.viewsets import CommentViewSet
+from assessments.api.viewsets import AssessmentViewSet
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.DefaultRouter()
-router.register(r'pontoturistico', TouristHotspotViewSet)
+router.register(r'pontoturistico', TouristHotspotViewSet,basename='TouristHotspot')
 router.register(r'atracoes',AttractionViewSet)
+router.register(r'endereco',AddressViewSet)
+router.register(r'comentarios',CommentViewSet)
+router.register(r'avaliacoes',AssessmentViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
-]
+    path('api-token-auth/', obtain_auth_token),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -12,9 +12,13 @@ class TouristHotspot(models.Model):
     attractions = models.ManyToManyField(Attraction,null=True,blank=True)
     comments = models.ManyToManyField(Comment,null=True,blank=True)
     assessments = models.ManyToManyField(Assessment,null=True,blank=True)
-    Addresses = models.ForeignKey(
+    addresses = models.ForeignKey(
         Address, on_delete=models.CASCADE,null=True,blank=True)
+    photo = models.ImageField(upload_to='pontos_turisticos', null=True, blank=True)
 
+    @property
+    def full_description2(self):
+        return '%s - %s' %(self.name, self.description )
 
     def __str__(self):
         return self.name
